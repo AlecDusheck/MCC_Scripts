@@ -1,9 +1,9 @@
 package us.mccode.scripts.MCCS.Statements;
 
+import org.bukkit.entity.Player;
 import us.mccode.scripts.MCCS.MCCS;
 import us.mccode.scripts.MCCS.Values.NumberValue;
 import us.mccode.scripts.MCCS.Values.StringValue;
-import org.bukkit.entity.Player;
 
 import java.io.IOException;
 
@@ -11,6 +11,9 @@ import java.io.IOException;
  * Created by Alec Dusheck on 3/23/2017.
  */
 public class InputStatement implements Statement {
+    private final String name;
+    private final Player player;
+
     public InputStatement(String name, Player player) {
         this.name = name;
         this.player = player;
@@ -27,14 +30,11 @@ public class InputStatement implements Statement {
                 //MCCS.variables.put(name, new NumberValue(value));
                 MCCS.putScriptVariables(player, name, new NumberValue(value));
             } catch (NumberFormatException e) {
-               //MCCS.variables.put(name, new StringValue(input));
+                //MCCS.variables.put(name, new StringValue(input));
                 MCCS.putScriptVariables(player, name, new StringValue(input));
             }
         } catch (IOException e1) {
             // HACK: Just ignore the problem.
         }
     }
-
-    private final String name;
-    private final Player player;
 }

@@ -16,24 +16,24 @@ import java.util.logging.Logger;
 /**
  * Created by Alec Dusheck on 3/26/2017.
  */
-public class MCCode extends JavaPlugin{
-
-    //Instance
-    static MCCode plugin;
+public class MCCode extends JavaPlugin {
 
     //Version
     public static final double VERSION = 0.8;
-
     //Currently compiling
     public static ArrayList<Player> currentlyCompiling = new ArrayList<Player>();
     public static HashMap<Player, Long> startedTimes = new HashMap<Player, Long>();
-
     //Bukkit Loggers
     public static ConsoleCommandSender console; //Defined in onEnable()
     public static Logger log; //Same here
-
+    //Instance
+    static MCCode plugin;
     //Startup time
     private long startupTimer; //Defined in onEnable()
+
+    public static MCCode getPlugin() {
+        return plugin;
+    }
 
     public void onEnable() {
         plugin = this;
@@ -56,9 +56,5 @@ public class MCCode extends JavaPlugin{
 
         //Message (Done)
         console.sendMessage(ChatColor.BLUE + "Done, took " + (System.currentTimeMillis() - startupTimer) + "ms.");
-    }
-
-    public static MCCode getPlugin(){
-        return plugin;
     }
 }

@@ -8,6 +8,9 @@ import us.mccode.scripts.MCCS.Values.Value;
  * Created by Alec Dusheck on 3/23/2017.
  */
 public class OperatorExpression implements Expression {
+    private final Expression left;
+    private final char operator;
+    private final Expression right;
     public OperatorExpression(Expression left, char operator,
                               Expression right) {
         this.left = left;
@@ -69,8 +72,4 @@ public class OperatorExpression implements Expression {
         }
         throw new Error("Unknown operator.");
     }
-
-    private final Expression left;
-    private final char operator;
-    private final Expression right;
 }

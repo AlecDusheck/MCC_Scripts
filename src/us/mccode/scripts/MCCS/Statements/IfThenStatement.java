@@ -1,13 +1,16 @@
 package us.mccode.scripts.MCCS.Statements;
 
+import org.bukkit.entity.Player;
 import us.mccode.scripts.MCCS.Expressions.Expression;
 import us.mccode.scripts.MCCS.MCCS;
-import org.bukkit.entity.Player;
 
 /**
  * Created by Alec Dusheck on 3/23/2017.
  */
 public class IfThenStatement implements Statement {
+    private final Expression condition;
+    private final String label;
+    private final Player player;
     public IfThenStatement(Expression condition, String label, Player player) {
         this.condition = condition;
         this.label = label;
@@ -23,8 +26,4 @@ public class IfThenStatement implements Statement {
             }
         }
     }
-
-    private final Expression condition;
-    private final String label;
-    private final Player player;
 }

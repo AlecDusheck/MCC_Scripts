@@ -9,8 +9,8 @@ import us.mccode.scripts.MCCode;
 /**
  * Created by Alec Dusheck on 3/26/2017.
  */
-public class playerLeave implements Listener{
-    public playerLeave(){
+public class playerLeave implements Listener {
+    public playerLeave() {
         MCCode.getPlugin().getServer().getPluginManager().registerEvents(this, MCCode.getPlugin());
     }
 

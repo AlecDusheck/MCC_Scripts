@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
  */
 public class MCCError extends RuntimeException {
 
-    public MCCError(Player player, String error, int ln){
+    public MCCError(Player player, String error, int ln) {
         player.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "(!) " + ChatColor.RED + "An error occurred in your script. The error was \"" + error + "\" (LN: " + ln + ").");
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 10, 1);
     }
