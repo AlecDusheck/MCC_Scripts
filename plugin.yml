@@ -1,0 +1,14 @@
+name: MCCode_Scripts
+main: us.mccode.scripts.MCCode
+description: Provides MCCode script fetures
+author: HSDO
+version: 0.1
+commands:
+   /:
+    description: Executes a script
+    usage: /<command> <script> <args> <args>
+    aliases: [execute, ex]
+   stopscript:
+       description: Stops the current script that the player is executing.
+       usage: /<command>
+       aliases: [ss, haltscript, halt]
