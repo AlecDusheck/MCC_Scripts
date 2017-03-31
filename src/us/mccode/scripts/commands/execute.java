@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import us.mccode.scripts.MCCS.MCCError;
 import us.mccode.scripts.MCCS.MCCS;
 import us.mccode.scripts.MCCode;
 
@@ -23,11 +24,11 @@ public class execute implements CommandExecutor {
                 player.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "(!) " + ChatColor.RED + "You are already executing a script. Please stop the current one by executing \"/stopscript\".");
                 return true;
             }
-            sender.sendMessage("this is a debug command");
+
             try {
-                MCCS.run(player, "furkansen26_test.txt");
+                MCCS.run(player, "furkansen26_test.txt", args);
             } catch (Exception e) {
-                //Bukkit with their errors....
+                //Ignore
             }
         } else {
             sender.sendMessage("You can't execute a script as console!");

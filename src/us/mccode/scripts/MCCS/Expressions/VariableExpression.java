@@ -1,6 +1,7 @@
 package us.mccode.scripts.MCCS.Expressions;
 
 import org.bukkit.entity.Player;
+import us.mccode.scripts.MCCS.MCCError;
 import us.mccode.scripts.MCCS.MCCS;
 import us.mccode.scripts.MCCS.Values.NumberValue;
 import us.mccode.scripts.MCCS.Values.Value;
@@ -21,6 +22,6 @@ public class VariableExpression implements Expression {
         if (MCCS.getScriptVariables(player).containsKey(name)) {
             return MCCS.getScriptVariables(player).get(name);
         }
-        return new NumberValue(0);
+        throw new MCCError(player, "Unknown variable \"" + name + "\".", MCCS.getCurrentStatement(player));
     }
 }

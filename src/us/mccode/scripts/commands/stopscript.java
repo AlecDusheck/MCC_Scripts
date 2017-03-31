@@ -20,12 +20,12 @@ public class stopscript implements CommandExecutor {
             Player player = (Player) sender;
             if (MCCode.currentlyCompiling.contains(player)) {
                 MCCode.currentlyCompiling.remove(player);
-                player.sendMessage(net.md_5.bungee.api.ChatColor.DARK_GREEN + "" + net.md_5.bungee.api.ChatColor.BOLD + "(!) " + net.md_5.bungee.api.ChatColor.RESET + "" + net.md_5.bungee.api.ChatColor.GREEN + "Script halted!");
+                player.sendMessage(net.md_5.bungee.api.ChatColor.DARK_GREEN + "" + net.md_5.bungee.api.ChatColor.BOLD + "(!) " + net.md_5.bungee.api.ChatColor.RESET + "" + net.md_5.bungee.api.ChatColor.GREEN + "Script stopped.");
                 return true;
             }
             player.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "(!) " + ChatColor.RED + "You are not currently executing a script.");
         } else {
-            sender.sendMessage("You can't execute a script as console!");
+            sender.sendMessage("You stop a script from console!");
         }
         return true;
     }

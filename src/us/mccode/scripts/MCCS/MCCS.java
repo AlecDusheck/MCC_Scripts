@@ -1,9 +1,12 @@
 package us.mccode.scripts.MCCS;
 
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import us.mccode.scripts.MCCS.Statements.Statement;
+import us.mccode.scripts.MCCS.Values.NumberValue;
+import us.mccode.scripts.MCCS.Values.StringValue;
 import us.mccode.scripts.MCCS.Values.Value;
 import us.mccode.scripts.MCCode;
 import us.mccode.scripts.TitleManager;
@@ -45,9 +48,10 @@ public class MCCS {
         setLineIn(player, new BufferedReader(converter));
     }
 
-    public static void run(Player player, String source) {
+    public static void run(Player player, String source, String[] args) {
         MCCS MCCSloc = new MCCS(player);
-        MCCSloc.interpret(player, source);
+        setCommandArgsVars(args, player);
+        interpret(player, source);
     }
 
     private static List<Token> tokenize(Player player, String source) {
@@ -152,19 +156,25 @@ public class MCCS {
         setCurrentStatement(player, 0);
         MCCode.startedTimes.put(player, System.currentTimeMillis());
 
-        new BukkitRunnable() {
-            public void run() {
-                if (getCurrentStatement(player) < statements.size() && player.isOnline() && MCCode.currentlyCompiling.contains(player)) {
-                    int thisStatement = getCurrentStatement(player);
-                    setCurrentStatement(player, getCurrentStatement(player) + 1);
-                    //currentStatement++;
-                    statements.get(thisStatement).execute();
-                } else {
-                    this.cancel();
-                    MCCode.currentlyCompiling.remove(player);
+
+            new BukkitRunnable() {
+                public void run() {
+                    //Catch annoying WARN message
+                    try {
+                    if (getCurrentStatement(player) < statements.size() && player.isOnline() && MCCode.currentlyCompiling.contains(player)) {
+                        int thisStatement = getCurrentStatement(player);
+                        setCurrentStatement(player, getCurrentStatement(player) + 1);
+                        //currentStatement++;
+                        statements.get(thisStatement).execute();
+                    } else {
+                        this.cancel();
+                        MCCode.currentlyCompiling.remove(player);
+                    }
+                    }catch (Exception e){
+                        //Catch annoying WARN message
+                    }
                 }
-            }
-        }.runTaskTimer(MCCode.getPlugin(), 0L, 1L);
+            }.runTaskTimer(MCCode.getPlugin(), 0L, 1L);
     }
 
     private static String readFile(String path) {
@@ -228,16 +238,34 @@ public class MCCS {
     }
 
     public static void putScriptVariables(Player player, String string, Value value) {
-        Map<String, Value> map = new HashMap<String, Value>();
+        Map<String, Value> map = getScriptVariables(player);
         map.put(string, value);
         setScriptVariables(player, map);
     }
 
     public static void putScriptLabels(Player player, String string, int num) {
-        Map<String, Integer> map = new HashMap<String, Integer>();
+        Map<String, Integer> map = getScriptLabels(player);
         map.put(string, num);
         setScriptLabels(player, map);
     }
 
+    public static void setCommandArgsVars(String[] args, Player player) {
+        int argsLegnth = args.length;
+        int exed = 0;
 
+        putScriptVariables(player, "argsSize", new NumberValue(argsLegnth));
+
+        if (argsLegnth == 0) {
+            return;
+        }
+        while (exed < argsLegnth) {
+            //putScriptVariables(player, "cmdArg" + exed, new StringValue(args[exed - 1]));
+
+            String input = args[exed];
+
+            putScriptVariables(player, "arg" + exed, new StringValue(input));
+
+            exed++;
+        }
+    }
 }

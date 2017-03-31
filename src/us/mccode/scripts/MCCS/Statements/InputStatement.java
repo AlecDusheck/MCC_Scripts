@@ -1,6 +1,7 @@
 package us.mccode.scripts.MCCS.Statements;
 
 import org.bukkit.entity.Player;
+import us.mccode.scripts.MCCS.MCCError;
 import us.mccode.scripts.MCCS.MCCS;
 import us.mccode.scripts.MCCS.Values.NumberValue;
 import us.mccode.scripts.MCCS.Values.StringValue;
@@ -34,7 +35,7 @@ public class InputStatement implements Statement {
                 MCCS.putScriptVariables(player, name, new StringValue(input));
             }
         } catch (IOException e1) {
-            // HACK: Just ignore the problem.
+            throw new MCCError(player, "An input error occurred.", MCCS.getCurrentStatement(player));
         }
     }
 }

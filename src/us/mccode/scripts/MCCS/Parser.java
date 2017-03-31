@@ -56,6 +56,8 @@ public class Parser {
                 statements.add(new PrintStatement(expression(player), player));
             } else if (match("heal")) {
                 statements.add(new healStatement(expression(player), player));
+            } else if (match("stop")) {
+                statements.add(new stopStatement(player));
             } else if (match("input")) {
                 statements.add(new InputStatement(
                         consume(player, TokenType.WORD).text, player));
